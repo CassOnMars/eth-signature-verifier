@@ -430,7 +430,7 @@ mod test {
         alloy_provider::Provider,
         alloy_signer::{k256::ecdsa::SigningKey, Signer, SignerSync},
         alloy_signer_local::PrivateKeySigner,
-        alloy_sol_types::{sol, eip712_domain, SolCall, SolValue},
+        alloy_sol_types::{eip712_domain, sol, SolCall, SolValue},
         serde::Serialize,
         test_helpers::{
             deploy_contract, message_str_to_bytes, sign_message_eip191, spawn_anvil,

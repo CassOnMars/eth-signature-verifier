@@ -1,11 +1,11 @@
 use {
+    alloy_node_bindings::{Anvil, AnvilInstance},
     alloy_primitives::{eip191_hash_message, hex, Address, FixedBytes},
     alloy_provider::{network::Ethereum, ReqwestProvider},
     alloy_signer::k256::{
         ecdsa::{Signature, SigningKey},
         sha2::{Digest, Sha256},
     },
-    alloy_node_bindings::{Anvil, AnvilInstance},
     regex::Regex,
     std::process::Stdio,
     tokio::process::Command,
