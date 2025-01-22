@@ -1,11 +1,9 @@
 use {
-    alloy::{
-        primitives::{eip191_hash_message, hex, Address, FixedBytes},
-        providers::{network::Ethereum, ReqwestProvider},
-        signers::k256::{
-            ecdsa::{Signature, SigningKey},
-            sha2::{Digest, Sha256},
-        },
+    alloy_primitives::{eip191_hash_message, hex, Address, FixedBytes},
+    alloy_provider::{network::Ethereum, ReqwestProvider},
+    alloy_signer::k256::{
+        ecdsa::{Signature, SigningKey},
+        sha2::{Digest, Sha256},
     },
     alloy_node_bindings::{Anvil, AnvilInstance},
     regex::Regex,
@@ -65,6 +63,7 @@ pub async fn deploy_contract(
         &cache_folder,
         "--out",
         &out_folder,
+        "--broadcast",
     ];
     if let Some(arg) = constructor_arg {
         args.push("--constructor-args");
