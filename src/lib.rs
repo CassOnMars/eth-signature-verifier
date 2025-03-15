@@ -220,13 +220,9 @@ where
 {
     let address = extract_address(signature.clone(), message, &provider)
         .await
-        .unwrap();
+        .map_err(|_| RpcError::LocalUsageError(Box::new(SignatureError::EcrecoverError)))?;
 
-    let code_at_address = provider
-        .get_code_at(address)
-        .await
-        .map_err(SignatureError::ProviderError)
-        .unwrap();
+    let code_at_address = provider.get_code_at(address).await?;
 
     if code_at_address.is_empty() {
         verify_signature(signature, address, message, provider).await
@@ -346,9 +342,7 @@ where
     let code_exists = provider
         .get_code_at(address)
         .await
-        .map_err(SignatureError::ProviderError)
-        .map(|code| !code.is_empty())
-        .unwrap();
+        .map(|code| !code.is_empty())?;
     if code_exists {
         let call_request = TransactionRequest::default()
             .to(address)
@@ -363,7 +357,7 @@ where
 
         let result = provider.call(&call_request).await;
 
-        let result = result.unwrap();
+        let result = result?;
         let magic = result.get(..4);
         if let Some(magic) = magic {
             if magic == MAGIC_VALUE.to_be_bytes().to_vec() {
