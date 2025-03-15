@@ -39,15 +39,7 @@ fn install_foundry() {
         .unwrap()
         .wait_with_output()
         .unwrap();
-    Command::new("source")
-        .args(["~/.bashrc"])
-        .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
-        .spawn()
-        .unwrap()
-        .wait_with_output()
-        .unwrap();
-    let output = Command::new("foundryup")
+    let output = Command::new(format_foundry_dir("bin/foundryup"))
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()
