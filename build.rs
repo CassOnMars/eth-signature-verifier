@@ -32,14 +32,28 @@ fn install_foundry() {
     std::fs::remove_dir_all(&bin_folder).ok();
     std::fs::create_dir_all(&bin_folder).unwrap();
     Command::new("bash")
-        .args(["-c", &format!("curl -L https://foundry.paradigm.xyz | FOUNDRY_DIR={} bash", format_foundry_dir(""))])
+        .args([
+            "-c",
+            &format!(
+                "curl -L https://foundry.paradigm.xyz | FOUNDRY_DIR={} bash",
+                format_foundry_dir("")
+            ),
+        ])
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()
         .unwrap()
         .wait_with_output()
         .unwrap();
-    let output = Command::new(format_foundry_dir("bin/foundryup"))
+    let output = Command::new("bash")
+        .args([
+            "-c",
+            &format!(
+                "FOUNDRY_DIR={} {}",
+                format_foundry_dir(""),
+                format_foundry_dir("bin/foundryup")
+            ),
+        ])
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()
