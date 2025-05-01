@@ -16,15 +16,11 @@ const ERC6492_DETECTION_SUFFIX: [u8; 32] = [
     0x64, 0x92, 0x64, 0x92, 0x64, 0x92, 0x64, 0x92, 0x64, 0x92, 0x64, 0x92, 0x64, 0x92, 0x64, 0x92,
 ];
 
-const VALIDATE_SIG_OFFCHAIN_BYTECODE: &[u8] = include_bytes!(concat!(
-    env!("OUT_DIR"),
-    "/../../../../.foundry/forge/out/Erc6492.sol/ValidateSigOffchain.bytecode"
-));
+const VALIDATE_SIG_OFFCHAIN_BYTECODE: &[u8] =
+    include_bytes!(".foundry/forge/out/Erc6492.sol/ValidateSigOffchain.bytecode");
 
-const ERC1271_MOCK_BYTECODE: &[u8] = include_bytes!(concat!(
-    env!("OUT_DIR"),
-    "/../../../../.foundry/forge/out/Erc1271Mock.sol/Erc1271Mock.bytecode"
-));
+const ERC1271_MOCK_BYTECODE: &[u8] =
+    include_bytes!(".foundry/forge/out/Erc1271Mock.sol/Erc1271Mock.bytecode");
 
 sol! {
   contract ValidateSigOffchain {
@@ -830,10 +826,8 @@ mod test {
         );
     }
 
-    const ERC1271_MOCK_BYTECODE: &[u8] = include_bytes!(concat!(
-        env!("OUT_DIR"),
-        "/../../../../.foundry/forge/out/Erc1271Mock.sol/Erc1271Mock.bytecode"
-    ));
+    const ERC1271_MOCK_BYTECODE: &[u8] =
+        include_bytes!(".foundry/forge/out/Erc1271Mock.sol/Erc1271Mock.bytecode");
 
     const ERC6492_MAGIC_BYTES: [u16; 16] = [
         0x6492, 0x6492, 0x6492, 0x6492, 0x6492, 0x6492, 0x6492, 0x6492, 0x6492, 0x6492, 0x6492,

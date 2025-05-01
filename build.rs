@@ -1,12 +1,14 @@
-use {
-    serde_json::Value,
-    std::process::{Command, Stdio},
-};
+// use {
+//    serde_json::Value,
+//    std::process::{Command, Stdio},
+// };
 
 fn main() {
-    build_contracts();
+    // uncomment to rebuild
+    // build_contracts();
 }
 
+/*
 fn build_contracts() {
     println!("cargo:rerun-if-changed=contracts");
     install_foundry();
@@ -35,7 +37,7 @@ fn install_foundry() {
         .args([
             "-c",
             &format!(
-                "curl -L https://foundry.paradigm.xyz | FOUNDRY_DIR={} bash -s -- --commit 6b07c77eb1c1d1c4b56ffa7f79240254b73236d2",
+                "curl -L https://foundry.paradigm.xyz | FOUNDRY_DIR={} bash",
                 format_foundry_dir("")
             ),
         ])
@@ -91,9 +93,7 @@ fn compile_contracts() {
     println!("forge stdout: {stdout:?}");
     let stderr = String::from_utf8(output.stderr).unwrap();
     println!("forge stderr: {stderr:?}");
-    // below assertion is commented out due to known pipe issues: https://github.com/rust-lang/rust/issues/97889
-    // uncomment and confirm output above is successful when making changes
-    // assert!(output.status.success());
+    assert!(output.status.success());
 }
 
 const ERC6492_FILE: &str = "forge/out/Erc6492.sol/ValidateSigOffchain.json";
@@ -128,3 +128,4 @@ fn extract_bytecode(input_file: &str, output_file: &str) {
     let bytecode = alloy::hex::decode(bytecode).unwrap();
     std::fs::write(output_file, bytecode).unwrap();
 }
+*/
