@@ -35,7 +35,7 @@ fn install_foundry() {
         .args([
             "-c",
             &format!(
-                "curl -L https://foundry.paradigm.xyz | FOUNDRY_DIR={} bash",
+                "curl -L https://foundry.paradigm.xyz | FOUNDRY_DIR={} bash -s -- --commit 6b07c77eb1c1d1c4b56ffa7f79240254b73236d2",
                 format_foundry_dir("")
             ),
         ])
@@ -91,7 +91,9 @@ fn compile_contracts() {
     println!("forge stdout: {stdout:?}");
     let stderr = String::from_utf8(output.stderr).unwrap();
     println!("forge stderr: {stderr:?}");
-    assert!(output.status.success());
+    // below assertion is commented out due to known pipe issues: https://github.com/rust-lang/rust/issues/97889
+    // uncomment and confirm output above is successful when making changes
+    // assert!(output.status.success());
 }
 
 const ERC6492_FILE: &str = "forge/out/Erc6492.sol/ValidateSigOffchain.json";
